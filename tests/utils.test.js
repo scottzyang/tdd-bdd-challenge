@@ -144,4 +144,13 @@ it("Should update the count of items in the cart")
 
 it("Should validate that an empty cart has 0 items")
 
-it("Should return the total cost of all items in the cart")
+it("Should return the total cost of all items in the cart", () => {
+  // create two items and add to cart
+  const newItem = utils.createItem("Item", 12.99);
+  const secondItem = utils.createItem("Second Item", 4.99);
+  utils.addItemToCart(newItem);
+  utils.addItemToCart(secondItem);
+
+  const total = utils.totalCost()
+  assert.equal(total, 17.98);
+})

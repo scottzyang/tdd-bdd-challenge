@@ -75,8 +75,16 @@ const removeItemFromCart = (item) => {
   }
 }
 
+const totalCost = () => {
+  let total = 0;
+  shoppingCart.forEach((item) => {
+    total += item.price
+  });
+  return total;
+}
+
 module.exports = {
   sayHello, area, perimeter, circleArea,
   clearCart, createItem, getShoppingCart, addItemToCart,
-  getNumItemsInCart, removeItemFromCart
+  getNumItemsInCart, removeItemFromCart, totalCost
 }
