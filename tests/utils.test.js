@@ -2,6 +2,8 @@ const mocha = require("mocha")
 const chai = require("chai")
 const utils = require("../utils")
 const expect = chai.expect
+const should = chai.should
+const assert = chai.assert
 
 // ========================================================
 // NOTE: https://mochajs.org/#arrow-functions
@@ -26,8 +28,43 @@ it("should say hello", function() {
 // This is called "Red-Green-Refactor"
 // ========================================================
 
+// ensure tests pass with proper values
+it("should return the area of a rectangle.", () => {
+  const rect_area = utils.area(2, 3);
+  expect(rect_area).to.be.a('number');
+  assert.equal(rect_area, 6);
+});
 
+it("should return the perimeter of a rectangle.", () => {
+  const perimeter = utils.perimeter(5, 3);
+  expect(perimeter).to.be.a('number');
+  assert.equal(perimeter, 16);
+});
 
+it("should return the area of a circle with radius.", () => {
+  const circ_area = utils.circleArea(4);
+  expect(circ_area).to.be.a('number');
+  assert.equal(circ_area, Math.PI * Math.pow(4, 2));
+});
+
+// Return null if negative values are provided.
+it("should return null area if negative w and h are provided.", () => {
+  const rect_area = utils.area(-3, 4);
+  expect(rect_area).to.be.a('null');
+  assert.equal(rect_area, null);
+});
+
+it("should return null perimeter if negative w and h are provided.", () => {
+  const perimeter = utils.perimeter(-7, 2);
+  expect(perimeter).to.be.a('null');
+  assert.equal(perimeter, null);
+});
+
+it("should return null circleArea if negative radius is provided.", () => {
+  const circ_area = utils.circleArea(-3);
+  expect(circ_area).to.be.a('null');
+  assert.equal(circ_area, null);
+});
 
 // ========================================================
 // Level 2 Challenges

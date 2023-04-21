@@ -7,15 +7,32 @@ const sayHello = () => {
 }
 
 const area = (w, h) => {
-  // should return the area
+  // should return the area unless negative values passed in
+  if (Math.sign(w) < 0 || Math.sign(h) < 0) {
+    return null;
+  } else {
+    return w * h;
+  }
 }
 
 const perimeter = (w, h) => {
   // should return the perimeter
+  if (Math.sign(w) < 0 || Math.sign(h) < 0) {
+    return null;
+  } else {
+    const perimeter = (2 * w) + (2 * h);
+    return perimeter;
+  }
 }
 
 const circleArea = r => {
   // should return the area of the circle
+  if (Math.sign(r) < 0) {
+    return null;
+  } else {
+    const area = Math.PI * Math.pow(r, 2);
+    return area;
+  }
 }
 
 // ========================================================
