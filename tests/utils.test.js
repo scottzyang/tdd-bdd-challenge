@@ -87,13 +87,54 @@ it("Should create a new (object) Item with name and price", function() {
   expect(item).to.have.property("quantity", 1)
 })
 
-it("Should return an array containing all items in cart")
+it("Should return an array containing all items in cart", () => {
+  // Create new item and add to cart
+  const iPhone = utils.createItem("iPhone", 899.99);
+  utils.addItemToCart(iPhone);
+  // get shopping cart and test datatype and length
+  const cart = utils.getShoppingCart();
+  expect(cart).to.be.a("array");
+  assert.equal(cart.length, 1);
+});
 
-it("Should add a new item to the shopping cart")
 
-it("Should return the number of items in the cart")
+it("Should add a new item to the shopping cart", () => {
+  // create item, get shopping cart, add item to cart
+  const newItem = utils.createItem("Item", 12.99);
+  const cart = utils.getShoppingCart()
+  utils.addItemToCart(newItem);
+  // test cart length, datatype, and properties
+  assert.equal(cart.length, 1);
+  expect(cart[0]).to.be.a("object");
+  expect(cart[0]).to.have.property("name", "Item");
+  expect(cart[0]).to.have.property("price", 12.99);
+})
 
-it("Should remove items from cart")
+it("Should return the number of items in the cart", () => {
+  // create two new items
+  const newItem = utils.createItem("Item", 12.99);
+  const secondItem = utils.createItem("Second Item", 4.99);
+  // get shopping cart
+  const cart = utils.getShoppingCart();
+  // add both items to cart
+  utils.addItemToCart(newItem);
+  utils.addItemToCart(secondItem);
+  // test cart length
+  const cartLength = utils.getNumItemsInCart();
+  assert.equal(cartLength, 2);
+});
+
+it("Should remove items from cart", () => {
+  // create new item and add to cart
+  const newItem = utils.createItem("Item", 12.99);
+  const cart = utils.getShoppingCart();
+  utils.addItemToCart(newItem);
+  assert.equal(cart.length, 1);
+
+  // test removal of item
+  utils.removeItemFromCart(newItem);
+  assert.equal(cart.length, 0);
+});
 
 // ========================================================
 // Stretch Challenges
