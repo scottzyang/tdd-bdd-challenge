@@ -2,7 +2,7 @@ const mocha = require("mocha")
 const chai = require("chai")
 const utils = require("../utils")
 const expect = chai.expect
-const should = chai.should
+const should = chai.should()
 const assert = chai.assert
 
 // ========================================================
@@ -140,9 +140,26 @@ it("Should remove items from cart", () => {
 // Stretch Challenges
 // ========================================================
 
-it("Should update the count of items in the cart")
+it("Should update the count of items in the cart", () => {
+  const newItem = utils.createItem("Banana", 3.99);
+  utils.addItemToCart(newItem);
+  const cart = utils.getShoppingCart();
 
-it("Should validate that an empty cart has 0 items")
+  // Test for first quantity
+  assert.equal(cart[0].quantity, 1)
+
+  // Add item again and test for quantity increment
+  utils.addItemToCart(newItem);
+  assert.equal(cart[0].quantity, 2);
+
+});
+
+it("Should validate that an empty cart has 0 items", () => {
+  const cart = utils.getShoppingCart();
+  const empty_cart = utils.cartIsEmpty(cart);
+  expect(empty_cart).to.be.a("boolean");
+  expect(empty_cart).to.equal(true)
+})
 
 it("Should return the total cost of all items in the cart", () => {
   // create two items and add to cart
@@ -153,4 +170,4 @@ it("Should return the total cost of all items in the cart", () => {
 
   const total = utils.totalCost()
   assert.equal(total, 17.98);
-})
+});
